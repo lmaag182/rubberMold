@@ -2,7 +2,7 @@ module rubberMold()
 {
     wheelRadius = 20;
     wheelHeight = 5;
-    overallHeight = 30;
+    overallHeight = 31;
     wholeThickness = 5;
     
     difference(){
@@ -17,7 +17,7 @@ module rubberMold()
             translate([0,0,-overallHeight/2])
                 cylinder(wheelHeight,wheelRadius,wheelRadius);
         }
-    //whole
+    //hole
     translate([0,0,-overallHeight/2-5])
         cylinder(70,wholeThickness,wholeThickness);
     }  
