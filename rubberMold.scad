@@ -4,6 +4,7 @@ module rubberMold()
     wheelHeight = 5;
     overallHeight = 31;
     wholeThickness = 5;
+    wallThickness = 2;
     
     difference(){
         union(){
