@@ -1,6 +1,6 @@
 module rubberMold()
 {
-    wheelRadius = 30;
+    wheelRadius = 35;
     wheelHeight = 5;
     overallHeight = 25;
     wholeThickness = 5;
