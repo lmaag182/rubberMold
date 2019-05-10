@@ -1,4 +1,4 @@
-# rubberMold
+# Silicon Rubber Mold
 Parametric rubbermold designer written in openSCAD
 
 
