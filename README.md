@@ -1,5 +1,5 @@
 # rubberMold
 Parametric rubbermold designer written in openSCAD
 
-Inline-style: 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+
+![alt text](https://github.com/lmaag182/rubberMold/blob/master/example.png "Example Render")
