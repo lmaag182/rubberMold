@@ -1,10 +1,10 @@
 //external parameters
-wheelRadius = 20;
+wheelRadius = 30;
 wheelHeight = 5;
 overallHeight = 88;
 wholeThickness = 5;
 wallThickness = 2;
-shaftRadius = 10;
+shaftRadius = 15;
 
 //internal parameters
 cutOverlap = 5;
@@ -55,6 +55,6 @@ echo(version="");
 
 
 
-cut(-10,0);
-cut(10,180);
+cut(-40,-180);
+cut(40,360);
 
