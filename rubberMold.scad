@@ -38,13 +38,15 @@ module mold()
     }
 }
 
-module cut() {
-    difference(){
-        
-        mold();
-        translate([0,-(wheelRadius+wallThickness +cutOverlap),-(overallHeight/2+wallThickness +cutOverlap)])
-        cube(size = [wheelRadius*2+2*wallThickness +2*cutOverlap, wheelRadius*2+2*wallThickness +2*cutOverlap, overallHeight+2*wallThickness + 2* cutOverlap], center = false);
-        
+module cut(displacement,rotation) {
+    translate([displacement,0,0]){
+        rotate([0,0,rotation]){
+            difference(){     
+                mold();
+                translate([0,-(wheelRadius+wallThickness +cutOverlap),-(overallHeight/2+wallThickness +cutOverlap)])
+                cube(size = [wheelRadius*2+2*wallThickness +2*cutOverlap, wheelRadius*2+2*wallThickness +2*cutOverlap,          overallHeight+2*wallThickness + 2* cutOverlap], center = false); 
+            }
+        }
     }
 }
 
@@ -53,4 +55,5 @@ echo(version="");
 
 
 
-cut();
+cut(-10,0);
+cut(10,180);
