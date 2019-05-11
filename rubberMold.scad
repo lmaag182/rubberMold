@@ -1,12 +1,10 @@
-module positive()
+module rubberMold()
 {
     wheelRadius = 20;
     wheelHeight = 5;
-    overallHeight = 88;
+    overallHeight = 31;
     wholeThickness = 5;
-    
     wallThickness = 2;
-    boringOverlap = 5;
     
     difference(){
         union(){
@@ -21,12 +19,12 @@ module positive()
                 cylinder(wheelHeight,wheelRadius,wheelRadius);
         }
     //hole
-    translate([0,0,-overallHeight/2-boringOverlap])
-        cylinder(overallHeight+2*boringOverlap,wholeThickness,wholeThickness);
+    translate([0,0,-overallHeight/2-5])
+        cylinder(70,wholeThickness,wholeThickness);
     }  
 }
 
 echo(version=version());
 echo(version="");
 
-positive();
+rubberMold();
