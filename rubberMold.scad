@@ -7,7 +7,7 @@ wallThickness = 2;
 shaftRadius = 10;
 
 //internal parameters
-boringOverlap = 5;
+cutOverlap = 5;
 
 module positive()
 {
@@ -15,17 +15,17 @@ module positive()
         union(){
             //shaft
             translate([0,0,-overallHeight/2])
-                cylinder(overallHeight,shaftRadius*2,shaftRadius*2);
+                cylinder(overallHeight,shaftRadius,shaftRadius);
             
             //wheels
             translate([0,0,overallHeight/2-wheelHeight])//{
-                cylinder(wheelHeight,wheelRadius*2,wheelRadius*2);
+                cylinder(wheelHeight,wheelRadius,wheelRadius);
             translate([0,0,-overallHeight/2])
-                cylinder(wheelHeight,wheelRadius*2,wheelRadius*2);
+                cylinder(wheelHeight,wheelRadius,wheelRadius);
         }
     //hole
-    translate([0,0,-overallHeight/2-boringOverlap])
-        cylinder(overallHeight+2*boringOverlap,wholeThickness,wholeThickness);
+    translate([0,0,-overallHeight/2-cutOverlap])
+        cylinder(overallHeight+2*cutOverlap,wholeThickness,wholeThickness);
     }  
 }
 
@@ -33,7 +33,7 @@ module mold()
 {
     difference(){
        translate([0,0,-overallHeight/2-wallThickness])
-           cylinder(overallHeight + 2 * wallThickness, wheelRadius*2 + 2* wallThickness,wheelRadius*2 + 2* wallThickness);
+           cylinder(overallHeight + 2 * wallThickness, wheelRadius + 2* wallThickness,wheelRadius + 2* wallThickness);
        positive();
     }
 }
@@ -42,7 +42,8 @@ module cut() {
     difference(){
         
         mold();
-        cube(size = [100, 100, 100], center = false);
+        translate([0,-(wheelRadius+wallThickness +cutOverlap),-(overallHeight/2+wallThickness +cutOverlap)])
+        cube(size = [wheelRadius*2+2*wallThickness +2*cutOverlap, wheelRadius*2+2*wallThickness +2*cutOverlap, overallHeight+2*wallThickness + 2* cutOverlap], center = false);
         
     }
 }
