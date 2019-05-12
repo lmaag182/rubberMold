@@ -1,5 +1,5 @@
 //external parameters
-wheelRadius = 302;
+wheelRadius = 30;
 wheelHeight = 5;
 overallHeight = 88;
 wholeThickness = 9;
@@ -53,9 +53,12 @@ module cut(displacement,rotation) {
 echo(version=version());
 echo(version="");
 
+module theThing(){
+    cut(-40,-180);
+    cut(40,360);
+    //cut(40,$t*360);//to animate
+}
 
+theThing();
 
-cut(-40,-180);
-cut(40,360);
-//cut(40,$t*360);//to animate
 
