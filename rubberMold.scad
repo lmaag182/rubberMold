@@ -57,4 +57,5 @@ echo(version="");
 
 cut(-40,-180);
 cut(40,360);
+//cut(40,$t*360);//to animate
 
