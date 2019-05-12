@@ -1,5 +1,5 @@
 //external parameters
-wheelRadius = 30;
+wheelRadius = 302;
 wheelHeight = 5;
 overallHeight = 88;
 wholeThickness = 9;
