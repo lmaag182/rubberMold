@@ -1,4 +1,4 @@
-//external parameters
+//default external parameters, can be overwritten via commandline
 wheelRadius = 30;
 wheelHeight = 5;
 overallHeight = 88;
@@ -19,7 +19,7 @@ module positive(wheelRadius)
             
             //wheels
             translate([0,0,overallHeight/2-wheelHeight])//{
-                cylinder(wheelHeight,wheelRadius,wheelRadius);
+                cylinder(wheelHeight,wheelRadius,wheelRadius,$fn=100);
             translate([0,0,-overallHeight/2])
                 cylinder(wheelHeight,wheelRadius,wheelRadius);
         }
@@ -60,7 +60,7 @@ module theThing(wheelRadius){
     //cut(40,$t*360);//to animate
 }
 
-theThing(wheelRadius=30);
-theThing(wheelRadius=40);
+theThing(wheelRadius);
+
 
 
