@@ -56,22 +56,26 @@ module cut(displacement,rotation,wheelRadius) {
 }
 
 module cut2(wheelRadius){
+    translate([6,-6,0])
     intersection(){     
         mold(wheelRadius);
         translate([0,-(wheelRadius+wallThickness +cutOverlap),-(overallHeight/2+wallThickness +cutOverlap)])
             cube(size = [wheelRadius+wallThickness +cutOverlap, wheelRadius+wallThickness +cutOverlap,overallHeight+2*wallThickness + 2* cutOverlap], center = false); 
     }
+    translate([6,6,0])
     intersection(){     
         mold(wheelRadius);
         translate([0,0,-(overallHeight/2+wallThickness +cutOverlap)])
             cube(size = [wheelRadius+wallThickness +cutOverlap, wheelRadius+wallThickness +cutOverlap,overallHeight+2*wallThickness + 2* cutOverlap], center = false); 
     }
+    translate([-6,6,0])
     intersection(){     
         mold(wheelRadius);
         translate([-(wheelRadius+wallThickness +cutOverlap),0,-(overallHeight/2+wallThickness +cutOverlap)])
             cube(size = [wheelRadius+wallThickness +cutOverlap, wheelRadius+wallThickness +cutOverlap,overallHeight+2*wallThickness + 2* cutOverlap], center = false); 
     }
-    intersection(){     
+    translate([-6,-6,0]) 
+    intersection(){   
         mold(wheelRadius);
         translate([-(wheelRadius+wallThickness +cutOverlap),-(wheelRadius+wallThickness +cutOverlap),-(overallHeight/2+wallThickness +cutOverlap)])
             cube(size = [wheelRadius+wallThickness +cutOverlap, wheelRadius+wallThickness +cutOverlap,overallHeight+2*wallThickness + 2* cutOverlap], center = false); 
