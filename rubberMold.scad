@@ -25,7 +25,7 @@ module positive(wheelRadius)
 
             //inlet
             translate([wheelRadius/2,wheelRadius/2,0])
-                cylinder(400,shaftRadius/4,shaftRadius/4);
+                cylinder(50,shaftRadius/2,shaftRadius/2);
 
         }
     //hole
