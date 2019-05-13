@@ -2,7 +2,7 @@
 wheelRadius = 30;
 wheelHeight = 5;
 overallHeight = 88;
-wholeThickness = 9;
+wholeThickness = 5;
 wallThickness = 2;
 shaftRadius = 15;
 
@@ -15,25 +15,30 @@ module positive(wheelRadius)
         union(){
             //shaft
             translate([0,0,-overallHeight/2])
-                cylinder(overallHeight,shaftRadius,shaftRadius);
+                cylinder(overallHeight,shaftRadius,shaftRadius,$fn=100);
             
             //wheels
             translate([0,0,overallHeight/2-wheelHeight])//{
                 cylinder(wheelHeight,wheelRadius,wheelRadius,$fn=100);
             translate([0,0,-overallHeight/2])
-                cylinder(wheelHeight,wheelRadius,wheelRadius);
+                cylinder(wheelHeight,wheelRadius,wheelRadius,$fn=100);
+
+            //inlet
+            translate([wheelRadius/2,wheelRadius/2,0])
+                cylinder(400,shaftRadius/4,shaftRadius/4);
+
         }
     //hole
     translate([0,0,-overallHeight/2-cutOverlap])
-        cylinder(overallHeight+2*cutOverlap,wholeThickness,wholeThickness);
-    }  
+        cylinder(overallHeight+2*cutOverlap,wholeThickness,wholeThickness,$fn=100);
+    }
 }
 
 module mold(wheelRadius)
 {
     difference(){
        translate([0,0,-overallHeight/2-wallThickness])
-           cylinder(overallHeight + 2 * wallThickness, wheelRadius + 2* wallThickness,wheelRadius + 2* wallThickness);
+           cylinder(overallHeight + 2 * wallThickness, wheelRadius + 2* wallThickness,wheelRadius + 2* wallThickness,$fn=100);
        positive(wheelRadius);
     }
 }
@@ -42,9 +47,9 @@ module cut(displacement,rotation,wheelRadius) {
     translate([displacement,0,0]){
         rotate([0,0,rotation]){
             difference(){     
-                mold(wheelRadius);
+                !mold(wheelRadius);
                 translate([0,-(wheelRadius+wallThickness +cutOverlap),-(overallHeight/2+wallThickness +cutOverlap)])
-                cube(size = [wheelRadius*2+2*wallThickness +2*cutOverlap, wheelRadius*2+2*wallThickness +2*cutOverlap,          overallHeight+2*wallThickness + 2* cutOverlap], center = false); 
+                    cube(size = [wheelRadius*2+2*wallThickness +2*cutOverlap, wheelRadius*2+2*wallThickness +2*cutOverlap,          overallHeight+2*wallThickness + 2* cutOverlap], center = false); 
             }
         }
     }
@@ -56,7 +61,7 @@ echo(version="");
 module theThing(wheelRadius){
     cut(-40,-180,wheelRadius);
     cut(40,360,wheelRadius);
-    cut(80,360,wheelRadius);
+    //cut(80,360,wheelRadius);
     //cut(40,$t*360);//to animate
 }
 
