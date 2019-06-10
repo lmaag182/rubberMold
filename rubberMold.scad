@@ -63,6 +63,7 @@ module cut2(wheelRadius){
     d = wheelRadius+wallThickness +cutOverlap;
     z = overallHeight/2+wallThickness +cutOverlap;
     o = overallHeight+2*wallThickness + 2* cutOverlap;
+    sep = 6;
     // cp = [[1,1],[1,-1],[-1,1],[-1,-1]];
     // curDisplacement = 6;
     // c = false;
@@ -75,25 +76,25 @@ module cut2(wheelRadius){
     //             cube(size = [d, d, o], center = c); 
     // }
 
-    translate([6,-6,0])
+    translate([sep,-sep,0])
     intersection(){     
         mold(wheelRadius);
         translate([0,-d,-z])
             cube(size = [d, d, o], center = c); 
     }
-    translate([6,6,0])
+    translate([sep,sep,0])
     intersection(){     
         mold(wheelRadius);
         translate([0,0,-z])
             cube(size = [d, d, o], center = c); 
     }
-    translate([-6,6,0])
+    translate([-sep,sep,0])
     intersection(){     
         mold(wheelRadius);
         translate([-d,0,-z])
             cube(size = [d, d, o], center = c); 
     }
-    translate([-6,-6,0]) 
+    translate([-sep,-sep,0]) 
     intersection(){   
         mold(wheelRadius);
         translate([-d,-d,-z])
