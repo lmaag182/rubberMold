@@ -63,7 +63,7 @@ module cut2(wheelRadius){
     d = wheelRadius+wallThickness +cutOverlap;
     z = overallHeight/2+wallThickness +cutOverlap;
     o = overallHeight+2*wallThickness + 2* cutOverlap;
-    sep = 6;
+    sep = 7;
     // cp = [[1,1],[1,-1],[-1,1],[-1,-1]];
     // curDisplacement = 6;
     // c = false;
