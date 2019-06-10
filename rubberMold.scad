@@ -76,9 +76,9 @@ module cut2(wheelRadius){
     //             cube(size = [d, d, o], center = c); 
     // }
 
-    translate([sep,-sep,0])
-    intersection(){     
-        mold(wheelRadius);
+    translate([sep,-sep,0])// move it a bit away from the center in order to visualize or print
+    intersection(){// do the actual cut
+        mold(wheelRadius);//provide a mold to cut away from
         translate([0,-d,-z])// move it so one edge is right in the center of the mold (one of 4 options)
             cube(size = [d, d, o], center = c);// a cube that is supposed to cut 1/4 of the mold
     }
