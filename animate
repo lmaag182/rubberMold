@@ -13,6 +13,8 @@ done;
 
 convert build/anim/example*.png to build/anim/example.gif
 
+openscad -o build/stl/example1.stl -D wheelRadius=20 --camera=500,500,500,0,0,0 --autocenter  --projection=p rubberMold.scad
+
 #for z in *.zip; do unzip "$z" ; done;
 #for z in *.zip; do echo $z ; done;
 
