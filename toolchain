@@ -1,0 +1,8 @@
+//stl from openscad design
+openscad -o /home/hans/ownCloud2/Documents/code/openscad/rubberMold/example1.stl -D wheelRadius=20 --camera=500,500,500,0,0,0 --autocenter  --projection=p /home/hans/ownCloud2/Documents/code/openscad/rubberMold/rubberMold.scad
+
+//png from openscad design
+openscad -o /home/hans/ownCloud2/Documents/code/openscad/rubberMold/example1.png -D wheelRadius=20 --camera=500,500,500,0,0,0 --autocenter  --projection=p /home/hans/ownCloud2/Documents/code/openscad/rubberMold/rubberMold.scad
+
+//gif animation from series of png's
+convert frame*.png to example.gif

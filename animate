@@ -1,0 +1,18 @@
+#for file in /*;do;unrar e $file;done;
+#for file in "ls *"; do echo $file; done;
+#for file in "*.rar"; do unrar x "$file"; done;
+#for file in "*.zip"; do unzip "$file" -d "$file" ; done;
+for z in {1..20}; 
+do 
+openscad -o build/anim/example$z.png -D wheelRadius=20 -D'$t='$z --camera=500,500,500,0,0,0 --autocenter  --projection=p rubberMold.scad
+#do unzip "$z" -d "$z'DIR'"; 
+
+
+#echo "$z"
+done;
+
+convert build/anim/example*.png to build/anim/example.gif
+
+#for z in *.zip; do unzip "$z" ; done;
+#for z in *.zip; do echo $z ; done;
+

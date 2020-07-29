@@ -1,5 +1,5 @@
 //default external parameters, can be overwritten via commandline
-wheelRadius = 30;
+wheelRadius = 40;
 wheelHeight = 5;
 overallHeight = 88;
 wholeThickness = 5;
@@ -63,20 +63,25 @@ module cut2(wheelRadius){
     d = wheelRadius+wallThickness +cutOverlap;
     z = overallHeight/2+wallThickness +cutOverlap;
     o = overallHeight+2*wallThickness + 2* cutOverlap;
-    sep = $t*10;
-    // cp = [[1,1],[1,-1],[-1,1],[-1,-1]];
-    // curDisplacement = 6;
-    // c = false;
-    // for (a=cp)
-    //     echo(a[0]);
+    sep = 10;
+    sep = $t;
+    cp = [[1,1],[1,-1],[-1,1],[-1,-1]];
+    c = false;
+    echo(cp);
+    for (a=cp){
+        echo(a[0]);
+        echo(a[1]);
+
+    }
+        
     //     translate([a[0]*curDisplacement,a[1]*curDisplacement,0])
     //     intersection(){     
     //         mold(wheelRadius);
     //         translate([0,-d,-z])
     //             cube(size = [d, d, o], center = c); 
-    // }
+    //}
 
-    translate([sep,-sep,0])// move it a bit away from the center in order to visualize or print
+    translate([sep,-sep,0])// move it a bit away from the center in order to visualize or print 
     intersection(){// do the actual cut
         mold(wheelRadius);//provide a mold to cut away from
         translate([0,-d,-z])// move it so one edge is right in the center of the mold (one of 4 options)

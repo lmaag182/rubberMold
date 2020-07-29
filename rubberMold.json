@@ -1,0 +1,24 @@
+{
+    "parameterSets": {
+        "design default values": {
+            "cutOverlap": "5",
+            "overallHeight": "80",
+            "shaftRadius": "15",
+            "wallThickness": "2",
+            "wheelHeight": "8",
+            "wheelRadius": "30",
+            "wholeThickness": "5"
+        },
+        "Parameter Set 2": {
+            "cutOverlap": "5",
+            "overallHeight": "88",
+            "shaftRadius": "9",
+            "wallThickness": "6",
+            "wheelHeight": "5",
+            "wheelRadius": "30",
+            "wholeThickness": "5"
+        }
+    },
+    "parameterSets": "",
+    "fileFormatVersion": "1"
+}
