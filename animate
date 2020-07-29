@@ -11,7 +11,7 @@ openscad -o build/anim/rubberMold$z.png -D wheelRadius=20 -D'$t='$z --camera=500
 #echo "$z"
 done;
 
-convert build/anim/example*.png to build/anim/rubberMold.gif
+convert build/anim/rubberMold*.png to build/anim/rubberMold.gif
 
 openscad -o build/stl/rubberMold.stl -D wheelRadius=20 --camera=500,500,500,0,0,0 --autocenter  --projection=p rubberMold.scad
 
