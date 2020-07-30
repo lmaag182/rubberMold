@@ -11,7 +11,7 @@ pipeline {
 
         stage('Initialize_2') {
           steps {
-            sleep 3
+            sleep 5
           }
         }
 
