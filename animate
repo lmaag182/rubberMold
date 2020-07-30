@@ -2,7 +2,7 @@
 #for file in "ls *"; do echo $file; done;
 #for file in "*.rar"; do unrar x "$file"; done;
 #for file in "*.zip"; do unzip "$file" -d "$file" ; done;
-exit 1
+#exit 1
 for z in {1..20}; 
 do 
 echo "process anim $z"
