@@ -7,7 +7,7 @@
 for ((z=1; z<=20; z++)); 
 do
 echo "process anim $z";
-openscad -o build/anim/rubberMold$z.png -D wheelRadius=40 -D '$t=1' --camera=500,500,500,0,0,0 --autocenter  --projection=p rubberMold.scad;
+openscad -o build/anim/rubberMold$z.png -D wheelRadius=40 -D '$t='$z --camera=500,500,500,0,0,0 --autocenter  --projection=p rubberMold.scad;
 #do unzip "$z" -d "$z'DIR'"; 
 
 
