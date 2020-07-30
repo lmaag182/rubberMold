@@ -9,7 +9,7 @@ pipeline {
           }
         }
 
-        stage('Initialize 2') {
+        stage('Initialize_2') {
           steps {
             sleep 3
           }
