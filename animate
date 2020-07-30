@@ -4,7 +4,7 @@
 #for file in "*.zip"; do unzip "$file" -d "$file" ; done;
 for z in {1..20}; 
 do 
-openscad -o build/anim/rubberMold$z.png -D wheelRadius=20 -D'$t='$z --camera=500,500,500,0,0,0 --autocenter  --projection=p rubberMold.scad
+openscad -o build/anim/rubberMold$z.png -D wheelRadius=40 -D'$t='$z --camera=500,500,500,0,0,0 --autocenter  --projection=p rubberMold.scad
 #do unzip "$z" -d "$z'DIR'"; 
 
 
@@ -13,7 +13,7 @@ done;
 
 convert build/anim/rubberMold*.png to build/anim/rubberMold.gif
 
-openscad -o build/stl/rubberMold.stl -D wheelRadius=20 --camera=500,500,500,0,0,0 --autocenter  --projection=p rubberMold.scad
+openscad -o build/stl/rubberMold.stl -D wheelRadius=40 --camera=500,500,500,0,0,0 --autocenter  --projection=p rubberMold.scad
 
 #for z in *.zip; do unzip "$z" ; done;
 #for z in *.zip; do echo $z ; done;
