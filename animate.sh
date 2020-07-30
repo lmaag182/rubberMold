@@ -16,8 +16,8 @@ done;
 
 convert build/anim/rubberMold*.png to build/anim/rubberMold.gif
 
-echo "create stl file ..."
-openscad -o rubberMold.stl -D wheelRadius=40 --camera=500,500,500,0,0,0 --autocenter  --projection=p rubberMold.scad
+echo "create stl file ... not at the moment"
+#openscad -o rubberMold.stl -D wheelRadius=40 --camera=500,500,500,0,0,0 --autocenter  --projection=p rubberMold.scad
 
 #for z in *.zip; do unzip "$z" ; done;
 #for z in *.zip; do echo $z ; done;
