@@ -1,3 +1,4 @@
+#!/bin/bash
 #for file in /*;do;unrar e $file;done;
 #for file in "ls *"; do echo $file; done;
 #for file in "*.rar"; do unrar x "$file"; done;
