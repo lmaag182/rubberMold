@@ -3,9 +3,9 @@
 #for file in "*.rar"; do unrar x "$file"; done;
 #for file in "*.zip"; do unzip "$file" -d "$file" ; done;
 #exit 1
-for z in {1..20}; 
+for ((z=1; z<=20; z++)); 
 do
-echo "'process anim '$z";
+echo "process anim $z";
 openscad -o build/anim/rubberMold$z.png -D wheelRadius=40 -D '$t=1' --camera=500,500,500,0,0,0 --autocenter  --projection=p rubberMold.scad;
 #do unzip "$z" -d "$z'DIR'"; 
 
