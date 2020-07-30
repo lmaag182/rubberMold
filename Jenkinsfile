@@ -15,7 +15,7 @@ pipeline {
           }
         }
 
-        stage('error') {
+        stage('Forced Fail') {
           steps {
             sh 'exit 1'
           }
