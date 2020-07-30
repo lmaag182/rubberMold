@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('initialize') {
       parallel {
-        stage('initialize') {
+        stage('initialize_1') {
           steps {
             sh 'echo "first step yeees"'
           }
