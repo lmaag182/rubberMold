@@ -15,6 +15,12 @@ pipeline {
           }
         }
 
+        stage('') {
+          steps {
+            sh 'exit 1'
+          }
+        }
+
       }
     }
 
