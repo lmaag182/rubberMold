@@ -75,7 +75,7 @@ The script always runs from its own directory, so this also works:
 |--------|----------------|--------|
 | `stl` | Printable STLs: halves, core, closed assembly | `build/stl/rubberMold_halves.stl`, `…_core.stl`, `…_assembly.stl` |
 | `png` | Preview at full open (halves apart, core extracted) | `build/anim/rubberMold.png` |
-| `anim` | Open/extract → close/reseat cycle + GIF | `build/anim/rubberMold_XX.png` + `rubberMold.gif` |
+| `anim` | Open/extract + **orbiting camera** → close/reseat + GIF | `build/anim/rubberMold_XX.png` + `rubberMold.gif` |
 | `all` | `stl` + `png` + `anim` | all of the above |
 
 ### Options
@@ -85,8 +85,12 @@ The script always runs from its own directory, so this also works:
 | `-r`, `--radius N` | `WHEEL_RADIUS` | `40` | `wheelRadius` in the model |
 | `-f`, `--fn N` | `FN` | `64` | Cylinder segments (higher = smoother & slower) |
 | `-s`, `--sep N` | `MAX_SEP` | `25` | Peak half separation when fully open |
-| `-n`, `--frames N` | `FRAMES` | `40` | Frames for one full open+close cycle (min 3) |
-| `-d`, `--delay CS` | `DELAY_CS` | `8` | GIF delay in centiseconds (`8` ≈ 0.08 s/frame) |
+| `-n`, `--frames N` | `FRAMES` | `96` | Frames per open+close cycle |
+| `-d`, `--delay CS` | `DELAY_CS` | `18` | GIF delay centiseconds (higher → slower playback) |
+| `--orbit-radius N` | `ORBIT_RADIUS` | `520` | Camera distance from origin (XY plane) |
+| `--orbit-height N` | `ORBIT_HEIGHT` | `320` | Camera Z elevation |
+| `--orbit-turns N` | `ORBIT_TURNS` | `0.35` | Turns over the GIF (`0.35` ≈ 126°, slow; `1` = full spin) |
+| `--orbit-offset DEG` | `ORBIT_OFFSET_DEG` | `45` | Starting azimuth (degrees) |
 | `-h`, `--help` | — | — | Print usage |
 
 ### Examples
@@ -96,8 +100,14 @@ The script always runs from its own directory, so this also works:
 ./export.sh stl
 ./export.sh png
 
-# Default open → close animation
+# Default: open/close + slow camera (~126° total, ~17s GIF)
 ./export.sh anim
+
+# Full 360° spin (faster angular rate over the same open/close)
+./export.sh --orbit-turns 1 anim
+
+# Even slower camera
+./export.sh --orbit-turns 0.2 -d 22 anim
 
 # Wider open, fewer frames (quick test)
 ./export.sh -n 12 -s 25 anim
@@ -149,6 +159,7 @@ function mold_sep(t) = maxSep * (1 - abs(2 * t - 1));
 | `1` | `0` | closed again |
 
 The GIF therefore **opens** the two mold halves, **closes** them, and loops cleanly.
+At the same time the camera **orbits** the mold (default one full turn per loop) so you see the assembly from all sides.
 
 ### In the OpenSCAD GUI
 
