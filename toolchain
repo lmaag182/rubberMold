@@ -8,12 +8,16 @@
 #
 # Manual one-liners:
 
-# STL
-openscad -o build/stl/rubberMold.stl -D 'wheelRadius=40' --autocenter --projection=p rubberMold.scad
+# STL (closed halves, $t=0)
+openscad -o build/stl/rubberMold.stl \
+  -D 'wheelRadius=40' -D 'fn=64' -D '$t=0' \
+  --autocenter --projection=p rubberMold.scad
 
-# Preview PNG ($t sets quarter separation in this model)
-openscad -o build/anim/rubberMold.png -D 'wheelRadius=40' -D '$t=5' \
-  --camera=500,500,500,0,0,0 --autocenter --projection=p --imgsize=800,800 rubberMold.scad
+# Preview PNG (fully open, $t=0.5)
+openscad -o build/anim/rubberMold.png \
+  -D 'wheelRadius=40' -D 'fn=64' -D '$t=0.5' \
+  --camera=500,500,500,0,0,0 --autocenter --projection=p \
+  --imgsize=800,800 rubberMold.scad
 
 # GIF from zero-padded frames (after ./export.sh anim)
-convert -delay 10 -loop 0 build/anim/rubberMold_*.png build/anim/rubberMold.gif
+convert -delay 8 -loop 0 build/anim/rubberMold_*.png build/anim/rubberMold.gif

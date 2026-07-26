@@ -2,7 +2,26 @@
 
 Parametric **silicon rubber mold** designer in OpenSCAD (v4).
 
-The model builds a positive (shaft + end wheels), subtracts it from a shell to form the mold cavity, then splits the mold into **four quarter pieces**. The export animation shows those quarters **opening and closing**.
+The tooling is **three pieces**:
+
+1. **Two clamshell halves** — outer shape of the spool (parting plane XZ, open along ±Y)  
+2. **Loose core pin** — forms the axial hole; **pulled out along Z** before the halves open  
+
+The export animation shows the halves opening and the core extracting together.
+
+### Why this layout?
+
+| Bad design | Problem |
+|------------|---------|
+| 4 radial quarters | Disks sit in fixed-height U-grooves → opening scrapes/tears the part |
+| Core molded into the halves | Fixed axle through both end caps → hollow shaft is cast *onto* that axle and **rips when the halves open** |
+| **2 halves + loose core** (this design) | Core withdraws along the axis; halves then open with no undercut |
+
+### Demolding sequence
+
+1. **Pull the core pin** out along the axis (use the end tabs)  
+2. **Open the two halves** along ±Y  
+3. Remove the cast; trim sprue / vent runners
 
 ![Open → close animation](build/anim/rubberMold.gif)
 
@@ -54,9 +73,9 @@ The script always runs from its own directory, so this also works:
 
 | Target | What it does | Output |
 |--------|----------------|--------|
-| `stl` | Closed mold mesh (`$t=0`) | `build/stl/rubberMold.stl` |
-| `png` | Single preview at full open (`$t=0.5`) | `build/anim/rubberMold.png` |
-| `anim` | Full **closed → open → closed** cycle + looping GIF | `build/anim/rubberMold_XX.png` + `rubberMold.gif` |
+| `stl` | Printable STLs: halves, core, closed assembly | `build/stl/rubberMold_halves.stl`, `…_core.stl`, `…_assembly.stl` |
+| `png` | Preview at full open (halves apart, core extracted) | `build/anim/rubberMold.png` |
+| `anim` | Open/extract → close/reseat cycle + GIF | `build/anim/rubberMold_XX.png` + `rubberMold.gif` |
 | `all` | `stl` + `png` + `anim` | all of the above |
 
 ### Options
@@ -65,7 +84,7 @@ The script always runs from its own directory, so this also works:
 |------|---------|---------|---------|
 | `-r`, `--radius N` | `WHEEL_RADIUS` | `40` | `wheelRadius` in the model |
 | `-f`, `--fn N` | `FN` | `64` | Cylinder segments (higher = smoother & slower) |
-| `-s`, `--sep N` | `MAX_SEP` | `20` | Peak quarter separation when fully open |
+| `-s`, `--sep N` | `MAX_SEP` | `25` | Peak half separation when fully open |
 | `-n`, `--frames N` | `FRAMES` | `40` | Frames for one full open+close cycle (min 3) |
 | `-d`, `--delay CS` | `DELAY_CS` | `8` | GIF delay in centiseconds (`8` ≈ 0.08 s/frame) |
 | `-h`, `--help` | — | — | Print usage |
@@ -126,10 +145,10 @@ function mold_sep(t) = maxSep * (1 - abs(2 * t - 1));
 | `$t` | Separation | Phase |
 |------|------------|--------|
 | `0` | `0` | closed |
-| `0.5` | `maxSep` | fully open |
+| `0.5` | `maxSep` | fully open (halves apart along ±Y) |
 | `1` | `0` | closed again |
 
-The GIF therefore **opens** the four quarters, **closes** them, and loops cleanly.
+The GIF therefore **opens** the two mold halves, **closes** them, and loops cleanly.
 
 ### In the OpenSCAD GUI
 
@@ -146,21 +165,33 @@ Set in `rubberMold.scad`, Customizer (`rubberMold.json`), or via `-D` / `export.
 
 | Parameter | Default | Role |
 |-----------|---------|------|
-| `wheelRadius` | `40` | Outer wheel / mold radius (`-r`) |
+| `wheelRadius` | `40` | Outer wheel radius (`-r`) |
 | `wheelHeight` | `5` | Wheel thickness |
-| `overallHeight` | `88` | Shaft / mold height |
+| `overallHeight` | `88` | Shaft / part height |
 | `shaftRadius` | `15` | Center shaft radius |
-| `wholeThickness` | `5` | Center hole radius |
-| `wallThickness` | `2` | Mold wall thickness |
+| `holeRadius` | `5` | Cast hole / core seat radius |
+| `wallThickness` | `2` | Mold wall (radial **and** end caps) |
+| `sprueRadius` | `6` | Pour channel (meets shaft + pierces roof) |
+| `ventRadius` | `2.5` | Disk vent radius (`0` disables vents) |
+| `diskVentCount` | `4` | Vents around each disk |
+| `bottomVents` | `true` | Floor vents into the **lower** disk |
+| `topVents` | `true` | Extra roof vents into the **upper** disk |
+| `corePullTab` | `12` | Grip length of core beyond each end cap |
+| `coreClearance` | `0.15` | Core pin radius undersize for release |
 | `fn` | `64` | Tessellation (`-f` / `--fn`) |
-| `maxSep` | `20` | Peak open distance (`-s` / `--sep`) |
-| `cutOverlap` | `5` | Boolean / cut padding |
+| `maxSep` | `25` | Peak half separation (`-s` / `--sep`) |
+| `cutOverlap` | `5` | Boolean / clip padding |
 
-Geometry pipeline in the SCAD:
+Geometry pipeline:
 
-1. **`positive()`** — shaft, wheels, inlet, center hole  
-2. **`mold()`** — outer shell minus positive  
-3. **`cut2()`** — four quarter pieces, offset by `mold_sep($t)`  
+1. **`outer_positive()`** — solid spool + sprue + top/bottom vents (**no** hole)  
+2. **`mold_half_body()`** — shell − outer positive − **core tunnel**  
+3. **`mold_halves()`** — two clamshell halves  
+4. **`core_pin()`** — separate axial pin with pull tabs  
+
+**Vents:** floor vents into the lower disk (inner + outer rings); roof vents into the upper disk.  
+
+**Core:** printed separately (`show="core"`). Seat it in the closed halves before pour; **extract along Z first**, then open the halves.
 
 ---
 
@@ -217,7 +248,7 @@ To hand-build an open→close sequence, pass `$t` from `0` to `1` in equal steps
 
 | File | Role |
 |------|------|
-| `rubberMold.scad` | Parametric OpenSCAD source (positive, mold, quarters, `mold_sep`) |
+| `rubberMold.scad` | Parametric OpenSCAD source (positive, mold, two halves, `mold_sep`) |
 | `rubberMold.json` | OpenSCAD Customizer parameter sets |
 | `export.sh` | Export driver: STL / PNG / open→close GIF |
 | `animate.sh` | Wrapper for `./export.sh anim` |
