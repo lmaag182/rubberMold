@@ -1,0 +1,9 @@
+# Intermediate OpenSCAD / export outputs (keep demo GIF + STL)
+build/anim/*.png
+build/anim/rubberMold_[0-9]*.png
+
+# Editor / OS junk
+*~
+*.swp
+.DS_Store
+Thumbs.db

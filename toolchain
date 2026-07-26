@@ -1,0 +1,19 @@
+# rubberMold export recipes (portable; run from this directory)
+#
+# Prefer the script:
+#   ./export.sh stl
+#   ./export.sh png
+#   ./export.sh anim
+#   ./export.sh -r 20 all
+#
+# Manual one-liners:
+
+# STL
+openscad -o build/stl/rubberMold.stl -D 'wheelRadius=40' --autocenter --projection=p rubberMold.scad
+
+# Preview PNG ($t sets quarter separation in this model)
+openscad -o build/anim/rubberMold.png -D 'wheelRadius=40' -D '$t=5' \
+  --camera=500,500,500,0,0,0 --autocenter --projection=p --imgsize=800,800 rubberMold.scad
+
+# GIF from zero-padded frames (after ./export.sh anim)
+convert -delay 10 -loop 0 build/anim/rubberMold_*.png build/anim/rubberMold.gif
